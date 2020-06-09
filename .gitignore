@@ -1,4 +1,4 @@
-dist
+dist/mysite
 assets
 .DS_Store
 KlaroConfig_write.ss
