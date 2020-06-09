@@ -2,7 +2,7 @@
   "name": "nomidi/kw-cookie-consent",
   "description": "Klaro Silverstripe Integration",
   "version": "0.0.1",
-  "type": "silverstripe-vendormodule",
+  "type": "silverstripe-module",
   "authors": [{
     "name": "Kooperative web",
     "email": "hallo@kooperative-web.de",
