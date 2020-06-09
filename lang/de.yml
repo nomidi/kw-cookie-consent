@@ -1,0 +1,14 @@
+de:
+  CookieSiteConfig:
+    COOKIEISACTIVE: Cookie Consent aktiv?
+    CookieLabelIntroHeading: Infobox Überschrift
+    CookieLabelIntroHeadingVAL: Wir verwenden Cookies
+    CookieLabelIntro: Infobox Text
+    CookieLabelIntroVAL: Auf unserer Webseite kommen verschiedene Cookies zum Einsatz. Einige von ihnen sind notwendig, während andere uns helfen, diese Website zu verbessern. Ihnen steht jederzeit ein Widerrufsrecht zu.
+    CookieLabelCPCActivateAllVAL: Alle akzeptieren
+    CookieLabelCPCActivateAll: Button alle Cookies akzeptieren
+    CookieLabelCPCDeactivateAllVAL: Nur technisch notwendige
+    CookieLabelCPCDeactivateAll: Button nur technisch notwendige Cookies zulassen
+    CookieLabelButtonAdvancedSettingsVAL: Individuelle Cookie Einstellungen
+    CookieColorCPCActivateAllVAL: '#3f7edf'
+    CookieColorCPCActivateAll: Button Farbe alle Cookies akzeptieren

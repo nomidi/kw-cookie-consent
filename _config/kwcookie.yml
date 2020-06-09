@@ -1,0 +1,23 @@
+kw\cookieconsent\CookieCategory:
+  OnInit:
+    Notwendig:
+      Required: true
+      Title: Notwendig
+      Content: Technisch notwendige Cookies helfen dabei diese Webseite nutzbar zu machen, indem sie Grundfunktionen wie Seitennavigation und Zugriff auf sichere Bereiche der Webseite ermöglichen. Die Webseite kann ohne diese Cookies nicht  funktionieren
+      CookieEntries:
+        Title: klaro! consent manager
+        Provider: Eigentümer dieser Website
+        Purpose: Speichert die Einstellungen der Besucher, die in dieser Box ausgewählt wurden.
+        CookieName: klaro
+        Time: 1 Jahr
+    Marketing:
+    Extern:
+kw\cookieconsent\CookieEntry:
+  DefaultData:
+    GoogleAnalytics:
+      Title: Google Analytics
+      Provider: Google LLC
+      Purpose: Cookie von Google für Website-Analysen. Erzeugt statistische Daten darüber, wie der Besucher die Website nutzt.
+      Policy: https://policies.google.com/privacy?hl=de
+      CookieName: _ga,_gat,_gid
+      Time: 2 Jahre

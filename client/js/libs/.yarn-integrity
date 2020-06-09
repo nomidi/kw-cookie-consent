@@ -1,0 +1,18 @@
+{
+  "systemParams": "darwin-x64-83",
+  "modulesFolders": [
+    "js/libs"
+  ],
+  "flags": [],
+  "linkedModules": [],
+  "topLevelPatterns": [
+    "jquery@^3.5.1",
+    "klaro@https://github.com/KIProtect/klaro"
+  ],
+  "lockfileEntries": {
+    "jquery@^3.5.1": "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5",
+    "klaro@https://github.com/KIProtect/klaro": "https://github.com/KIProtect/klaro#0b54762799b29fe6994f03aff2b2908b0fa70a9b"
+  },
+  "files": [],
+  "artifacts": {}
+}

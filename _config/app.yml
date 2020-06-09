@@ -1,0 +1,6 @@
+SiteConfig:
+  extensions:
+    - kw\cookieconsent\CookieSiteConfig
+Page_Controller:
+  extensions:
+    - kw\cookieconsent\CookieInit
