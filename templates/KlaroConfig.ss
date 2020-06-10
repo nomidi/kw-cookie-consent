@@ -15,23 +15,31 @@
                     <% loop $CookieEntries %>
                         '$CookieID':{
                             'description': '$Purpose'
-                        }<% if $Last %><% else %>,<% end_if %>
+                        },
                     <% end_loop %>
+                    'purposes': {
+                        <% loop $CookieCategories %>'$CookieCategoryID': '$Title'<% if Last %><% else %>,<% end_if %><% end_loop %>
+                    }
                 <% end_if %>
 
             }
         },
-        <% if $CookieEntries %>
+        <% if $CookieCategories %>
         'apps': [
-        <% loop $CookieEntries %>
+
+        <% loop $CookieCategories %>
+            <% loop $CookieEntries %>
             {
                 'name': '$CookieID',
                 'required': <% if $CookieCategory.Required %>true<% else %>false<% end_if %>,
                 'default': <% if $CookieCategory.Required %>true<% else %>false<% end_if %>,
+                'purposes': ['$CookieCategory.CookieCategoryID'],
                 'title': '$Title',
                 'cookies': '$CookieName'<% if $HTMLCallback %>,
                 'callback': function(consent, app) {{$HTMLCallback}(consent,app);}<% end_if %>
             }<% if $Last %><% else %>,<% end_if %>
+            <% end_loop %>
+            <% if $Last %><% else %>,<% end_if %>
         <% end_loop %>
         ]
         <% end_if %>

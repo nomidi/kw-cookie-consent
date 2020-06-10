@@ -118,7 +118,8 @@
             $KlaroConfig = $siteConfig->customise(
                 array(
                     'siteConfig'=>$siteConfig,
-                    'CookieEntries'=>\kw\cookieconsent\CookieEntry::get())
+                    'CookieEntries'=>\kw\cookieconsent\CookieEntry::get(),
+                    'CookieCategories'=>\kw\cookieconsent\CookieCategory::get())
             )->renderWith('KlaroConfig');
 
             $fp = fopen(__DIR__ . '/../../templates/KlaroConfig_write.ss', 'w+');
