@@ -121,20 +121,35 @@
 
         public function getCookieCategoriesByLang($Locale)
         {
-            return Translatable::get_one_by_locale('\kw\cookieconsent\CookieCategory', $Locale);
+            if($this->owner->hasExtension('Translatable')){
+                return Translatable::get_one_by_locale('\kw\cookieconsent\CookieCategory', $Locale);
+            } else {
+                return kw\cookieconsent\CookieCategory::get();
+            }
+
         }
 
         public function getCookieEntriesByLang($Locale)
         {
-            return Translatable::get_one_by_locale('\kw\cookieconsent\CookieEntry', $Locale);
+            if($this->owner->hasExtension('Translatable')){
+                return Translatable::get_one_by_locale('\kw\cookieconsent\CookieEntry', $Locale);
+            } else {
+                return kw\cookieconsent\CookieEntry::get();
+            }
+
+
         }
 
         public static function writeConfig()
         {
             $siteConfig = SiteConfig::current_site_config();
 
+            if($siteConfig->hasExtension('Translatable')){
+                $SiteConfigDefault = Translatable::get_one_by_locale('SiteConfig', Translatable::default_locale());
+            } else {
+                $SiteConfigDefault = $siteConfig;
+            }
 
-            $SiteConfigDefault = Translatable::get_one_by_locale('SiteConfig', Translatable::default_locale());
 
 
 
@@ -161,7 +176,13 @@
             return trim(str_replace(array("\r\n", "\r", "\n","  "), "", $template));
         }
 
-        public function getJSLocale(){
-            return i18n::get_lang_from_locale($this->owner->Locale);
+        public function getJSLocale()
+        {
+            if ($this->owner->hasExtension('Translatable')) {
+                $locale = $this->owner->Locale;
+            } else {
+                $locale = i18n::get_locale();
+            }
+            return i18n::get_lang_from_locale($locale);
         }
     }
