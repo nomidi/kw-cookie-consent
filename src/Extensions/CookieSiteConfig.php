@@ -29,7 +29,8 @@
             'CookieLabelCPCDeactivateAll'=> 'Text',
             'CookieLabelCPCPurposeDesc'=> 'Text',
             'CookieColorCPCActivateAll'=>'Text',
-            'CookieLanguage'=>'Varchar'
+            'CookieLanguage'=>'Varchar',
+            'CookieLabelSaveButton'=>'Text'
         );
 
         private static $has_one = array(
@@ -52,6 +53,7 @@
             $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCActivateAllField = new TextField('CookieLabelCPCActivateAll', _t('CookieSiteConfig.CookieLabelCPCActivateAll')));
             $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCDeactivateAllField = new TextField('CookieLabelCPCDeactivateAll', _t('CookieSiteConfig.CookieLabelCPCDeactivateAll')));
             $fields->addFieldToTab('Root.CookieConsent', $CookieColorCPCActivateAllField = new TextField('CookieColorCPCActivateAll', _t('CookieSiteConfig.CookieColorCPCActivateAll')));
+            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelSaveButtonField = new TextField('CookieLabelSaveButton', _t('CookieSiteConfig.CookieLabelSaveButton')));
 
 
 
@@ -73,7 +75,7 @@
             $CookieColorCPCActivateAllField->setAttribute('placeholder', '#3f7edf');
             $CookieLabelCPCActivateAllField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelCPCActivateAllVAL'));
             $CookieLabelCPCDeactivateAllField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelCPCDeactivateAllVAL'));
-
+            $CookieLabelSaveButtonField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelSaveButtonVAL'));
 
 
 
@@ -112,6 +114,9 @@
             if ($this->owner->CookieLabelCPCDeactivateAll == '') {
                 $this->owner->CookieLabelCPCDeactivateAll = _t('CookieSiteConfig.CookieLabelCPCDeactivateAllVAL');
             }
+            if($this->owner->CookieLabelSaveButton == ''){
+                $this->owner->CookieLabelSaveButton = _t('CookieSiteConfig.CookieLabelSaveButtonVAL');
+            }
         }
         public function onAfterWrite()
         {
@@ -122,7 +127,7 @@
         public function getCookieCategoriesByLang($Locale)
         {
             if($this->owner->hasExtension('Translatable')){
-                return Translatable::get_one_by_locale('\kw\cookieconsent\CookieCategory', $Locale);
+                return Translatable::get_by_locale('\kw\cookieconsent\CookieCategory', $Locale);
             } else {
                 return kw\cookieconsent\CookieCategory::get();
             }
@@ -132,7 +137,7 @@
         public function getCookieEntriesByLang($Locale)
         {
             if($this->owner->hasExtension('Translatable')){
-                return Translatable::get_one_by_locale('\kw\cookieconsent\CookieEntry', $Locale);
+                return Translatable::get_by_locale('\kw\cookieconsent\CookieEntry', $Locale);
             } else {
                 return kw\cookieconsent\CookieEntry::get();
             }
@@ -155,9 +160,9 @@
 
             $KlaroConfig = $siteConfig->customise(
                 array(
-                    
-                    'SiteConfigDefault'=>$SiteConfigDefault,
 
+                    'SiteConfigDefault'=>$SiteConfigDefault,
+                    'CookieEntries'=>CookieEntry::get(),
                     'CookieCategories'=> CookieCategory::get(),
                 ))->renderWith('KlaroConfig');
 

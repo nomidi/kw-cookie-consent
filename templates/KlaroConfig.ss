@@ -3,10 +3,10 @@
     var klaroLanguage = html.getAttribute('lang');
 
     var privacypage = {
-      <% with $SiteConfig %>
-          '$Locale.rfc1766': '$CookieLinkPrivacy().AbsoluteLink()',
-          <% if $Translations %><% loop $Translations %>'$Locale.rfc1766': '$CookieLinkPrivacy().AbsoluteLink()'<% end_loop %>,<% end_if %>
-      <% end_with %>
+        <% with $SiteConfig %>
+            '$Locale.rfc1766': '$CookieLinkPrivacy().AbsoluteLink()',
+            <% if $Translations %><% loop $Translations %>'$Locale.rfc1766': '$CookieLinkPrivacy().AbsoluteLink()'<% end_loop %>,<% end_if %>
+        <% end_with %>
     };
 
 
@@ -17,12 +17,36 @@
         'translations': {
         <% with $SiteConfigDefault %>
             $getJSLocale:{
+            'consentNotice': {
+                'description': '$CookieLabelIntro',
+            },
+            'acceptAll': '$CookieLabelCPCActivateAll',
+                    'decline': '$CookieLabelCPCDeactivateAll',
+                    'acceptSelected': '$CookieLabelSaveButton',
+
+            <% if $getCookieCategoriesByLang($Locale) %>
+            'purposes': {
+                <% loop $getCookieCategoriesByLang($Locale) %>'$Key': '$Title',<% end_loop %>
+            },
+            <% end_if %>
+
+            <% if $getCookieEntriesByLang($Locale) %>
+                <% loop $getCookieEntriesByLang($Locale) %>
+                    '$CookieKey':{
+                    'description': '$Purpose'
+                },
+                <% end_loop %>
+            <% end_if %>
+
+        },
+            <% if $Translations %><% loop $Translations %>
+                $getJSLocale:{
                 'consentNotice': {
                     'description': '$CookieLabelIntro',
                 },
                 'acceptAll': '$CookieLabelCPCActivateAll',
-                'decline': '$CookieLabelCPCDeactivateAll',
-                'acceptSelected': 'Speichern',
+                        'decline': '$CookieLabelCPCDeactivateAll',
+                        'acceptSelected': '$CookieLabelSaveButton',
 
                 <% if $getCookieCategoriesByLang($Locale) %>
                 'purposes': {
@@ -30,38 +54,14 @@
                 },
                 <% end_if %>
 
-               <% if $getCookieEntriesByLang($Locale) %>
-               <% loop $getCookieEntriesByLang($Locale) %>
-                '$CookieKey':{
-                    'description': '$Purpose'
-                },
-                <% end_loop %>
-                <% end_if %>
-
-            },
-            <% if $Translations %><% loop $Translations %>
-                $getJSLocale:{
-                    'consentNotice': {
-                        'description': '$CookieLabelIntro',
-                    },
-                    'acceptAll': '$CookieLabelCPCActivateAll',
-                    'decline': '$CookieLabelCPCDeactivateAll',
-                    'acceptSelected': 'Speichern',
-
-                    <% if $getCookieCategoriesByLang($Locale) %>
-                    'purposes': {
-                        <% loop $getCookieCategoriesByLang($Locale) %>'$Key': '$Title',<% end_loop %>
-                    },
-                    <% end_if %>
-
-                    <% if $getCookieEntriesByLang($Locale) %>
+                <% if $getCookieEntriesByLang($Locale) %>
                     <% loop $getCookieEntriesByLang($Locale) %>
                         '$CookieKey':{
                         'description': '$Purpose'
                     },
                     <% end_loop %>
                 <% end_if %>
-                },
+            },
             <% end_loop %><% end_if %>
         },
         <% end_with %>
