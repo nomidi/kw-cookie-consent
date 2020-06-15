@@ -150,7 +150,7 @@
                 array(
 
                     'SiteConfigDefault'=>$SiteConfig,
-                    'DefaultLocale'=>i18n::convert_rfc1766(i18n::get()),
+                    'DefaultLocale'=>i18n::getData()->langFromLocale(i18n::get_locale()),
                     'CookieEntries'=>CookieEntry::get(),
                     'CookieCategories'=> CookieCategory::get(),
                 ))->renderWith('KlaroConfig');
