@@ -1,16 +1,8 @@
 <script>
-    var html = document.querySelector("html");
-    var klaroLanguage = html.getAttribute('lang');
-
-    var privacypage = {
-        <% with $SiteConfig %>
-            '$Top.DefaultLocale': '$CookieLinkPrivacy().AbsoluteLink()',
-        <% end_with %>
-    };
 
 
     var klaroConfig = {
-        'privacyPolicy': privacypage[klaroLanguage],
+        'privacyPolicy': <% with $SiteConfig %>'$CookieLinkPrivacy().AbsoluteLink()<% end_with %>',
         'acceptAll': true,
         'hideDeclineAll': false,
         'translations': {

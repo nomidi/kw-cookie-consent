@@ -4,6 +4,7 @@
 
 
 
+    use SilverStripe\ORM\DB;
     use SilverStripe\Core\Config\Config;
     use SilverStripe\Forms\CheckboxField;
     use SilverStripe\Forms\FieldList;
