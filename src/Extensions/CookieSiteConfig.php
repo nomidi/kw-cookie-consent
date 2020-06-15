@@ -1,19 +1,21 @@
 <?php
     namespace kw\cookieconsent;
 
-    use ArrayData;
-    use CheckboxField;
-    use DataExtension;
-    use Debug;
-    use FieldList;
-    use GridField;
-    use GridFieldConfig_RecordEditor;
-    use i18n;
-    use SiteConfig;
-    use TextareaField;
-    use TextField;
-    use Translatable;
-    use TreeDropdownField;
+
+
+    use SilverStripe\CMS\Model\SiteTree;
+    use SilverStripe\Forms\CheckboxField;
+    use SilverStripe\Forms\FieldList;
+    use SilverStripe\Forms\GridField\GridField;
+    use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+    use SilverStripe\Forms\TextareaField;
+    use SilverStripe\Forms\TextField;
+    use SilverStripe\Forms\TreeDropdownField;
+    use SilverStripe\i18n\i18n;
+    use SilverStripe\ORM\DataExtension;
+    use SilverStripe\SiteConfig\SiteConfig;
+
+
 
     class CookieSiteConfig extends DataExtension
     {
@@ -34,8 +36,8 @@
         );
 
         private static $has_one = array(
-            'CookieLinkPrivacy' => 'SiteTree',
-            'CookieLinkImprint' => 'SiteTree'
+            'CookieLinkPrivacy' => SiteTree::class,
+            'CookieLinkImprint' => SiteTree::class
         );
 
 
@@ -50,32 +52,32 @@
 
             $fields->addFieldToTab('Root.CookieConsent', new CheckboxField('CookieIsActive', _t('CookieSiteConfig.COOKIEISACTIVE', "Cookie Consent aktiv?")));
             $fields->addFieldToTab('Root.CookieConsent', $CookieLabelIntroField = new TextareaField('CookieLabelIntro', _t('CookieSiteConfig.CookieLabelIntro', "Infobox ")));
-            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCActivateAllField = new TextField('CookieLabelCPCActivateAll', _t('CookieSiteConfig.CookieLabelCPCActivateAll')));
-            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCDeactivateAllField = new TextField('CookieLabelCPCDeactivateAll', _t('CookieSiteConfig.CookieLabelCPCDeactivateAll')));
-            $fields->addFieldToTab('Root.CookieConsent', $CookieColorCPCActivateAllField = new TextField('CookieColorCPCActivateAll', _t('CookieSiteConfig.CookieColorCPCActivateAll')));
-            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelSaveButtonField = new TextField('CookieLabelSaveButton', _t('CookieSiteConfig.CookieLabelSaveButton')));
+            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCActivateAllField = new TextField('CookieLabelCPCActivateAll', _t('CookieSiteConfig.CookieLabelCPCActivateAll','Button alle Cookies akzeptieren')));
+            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCDeactivateAllField = new TextField('CookieLabelCPCDeactivateAll', _t('CookieSiteConfig.CookieLabelCPCDeactivateAll','Button nur technisch notwendige Cookies zulassen')));
+            $fields->addFieldToTab('Root.CookieConsent', $CookieColorCPCActivateAllField = new TextField('CookieColorCPCActivateAll', _t('CookieSiteConfig.CookieColorCPCActivateAll','Button Farbe alle Cookies akzeptieren')));
+            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelSaveButtonField = new TextField('CookieLabelSaveButton', _t('CookieSiteConfig.CookieLabelSaveButton','CookieLabelSaveButton')));
 
 
 
 
             $fields->addFieldToTab('Root.CookieConsent', $CookieLabelButtonAdvancedSettingsField = new TextField('CookieLabelButtonAdvancedSettings'));
-            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelButtonBackField = new TextField('CookieLabelButtonBack'));
+          #  $fields->addFieldToTab('Root.CookieConsent', $CookieLabelButtonBackField = new TextField('CookieLabelButtonBack'));
 
-            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCHeadingField = new TextField('CookieLabelCPCHeading'));
-            $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCTextField = new TextareaField('CookieLabelCPCText'));
-
-
-            $fields->addFieldToTab('Root.CookieConsent', $treedropdownfield = new TreeDropdownField("CookieLinkPrivacyID", _t('CookieConsent.CookieLinkPrivacyID', "Link zur Datenschutzseite "), "SiteTree"));
-            $fields->addFieldToTab('Root.CookieConsent', $treedropdownfield = new TreeDropdownField("CookieLinkImprintID", _t('CookieConsent.CookieLinkImprint', "Link zum Impressum "), "SiteTree"));
+          #  $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCHeadingField = new TextField('CookieLabelCPCHeading'));
+          #  $fields->addFieldToTab('Root.CookieConsent', $CookieLabelCPCTextField = new TextareaField('CookieLabelCPCText'));
 
 
-            $CookieLabelIntroField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelIntroVAL'));
-            $CookieLabelButtonAdvancedSettingsField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelButtonAdvancedSettingsVAL'));
-            $CookieLabelButtonBackField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelButtonBackVAL'));
+            $fields->addFieldToTab('Root.CookieConsent', $treedropdownfield = new TreeDropdownField("CookieLinkPrivacyID", _t('CookieConsent.CookieLinkPrivacyID', "Link zur Datenschutzseite "), 'SilverStripe\CMS\Model\SiteTree'));
+       #     $fields->addFieldToTab('Root.CookieConsent', $treedropdownfield = new TreeDropdownField("CookieLinkImprintID", _t('CookieConsent.CookieLinkImprint', "Link zum Impressum "),  'SilverStripe\CMS\Model\SiteTree'));
+
+
+            $CookieLabelIntroField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelIntroVAL','Auf unserer Webseite kommen verschiedene Cookies zum Einsatz. Einige von ihnen sind notwendig, während andere uns helfen, diese Website zu verbessern. Ihnen steht jederzeit ein Widerrufsrecht zu.'));
+            $CookieLabelButtonAdvancedSettingsField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelButtonAdvancedSettingsVAL','Individuelle Cookie Einstellungen'));
+           # $CookieLabelButtonBackField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelButtonBackVAL'));
             $CookieColorCPCActivateAllField->setAttribute('placeholder', '#3f7edf');
-            $CookieLabelCPCActivateAllField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelCPCActivateAllVAL'));
-            $CookieLabelCPCDeactivateAllField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelCPCDeactivateAllVAL'));
-            $CookieLabelSaveButtonField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelSaveButtonVAL'));
+            $CookieLabelCPCActivateAllField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelCPCActivateAllVAL','Alle akzeptieren'));
+            $CookieLabelCPCDeactivateAllField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelCPCDeactivateAllVAL','Nur technisch notwendige'));
+            $CookieLabelSaveButtonField->setAttribute('placeholder', _t('CookieSiteConfig.CookieLabelSaveButtonVAL','Speichern'));
 
 
 
@@ -88,6 +90,10 @@
                 'Root.CookieConsent',
                 GridField::create('CookieEntry', 'Cookies', CookieEntry::get(), GridFieldConfig_RecordEditor::create())
             );
+
+
+
+
         }
 
         public function onBeforeWrite()
@@ -97,25 +103,25 @@
             #   $this->owner->CookieLabelIntroHeading = _t('CookieSiteConfig.CookieLabelIntroHeadingVAL');
             #}
             if ($this->owner->CookieLabelIntro == '') {
-                $this->owner->CookieLabelIntro = _t('CookieSiteConfig.CookieLabelIntroVAL');
+                $this->owner->CookieLabelIntro = _t('CookieSiteConfig.CookieLabelIntroVAL','Auf unserer Webseite kommen verschiedene Cookies zum Einsatz. Einige von ihnen sind notwendig, während andere uns helfen, diese Website zu verbessern. Ihnen steht jederzeit ein Widerrufsrecht zu.');
             }
             if ($this->owner->CookieLabelButtonAdvancedSettings == '') {
-                $this->owner->CookieLabelButtonAdvancedSettings = _t('CookieSiteConfig.CookieLabelButtonAdvancedSettingsVAL');
+                $this->owner->CookieLabelButtonAdvancedSettings = _t('CookieSiteConfig.CookieLabelButtonAdvancedSettingsVAL','Individuelle Cookie Einstellungen');
             }
-            if ($this->owner->CookieLabelButtonBack == '') {
-                $this->owner->CookieLabelButtonBack = _t('CookieSiteConfig.CookieLabelButtonBackVAL');
-            }
+            #if ($this->owner->CookieLabelButtonBack == '') {
+             #   $this->owner->CookieLabelButtonBack = _t('CookieSiteConfig.CookieLabelButtonBackVAL','');
+            #}
             if ($this->owner->CookieColorCPCActivateAll == '') {
-                $this->owner->CookieColorCPCActivateAll = _t('CookieSiteConfig.CookieColorCPCActivateAllVAL');
+                $this->owner->CookieColorCPCActivateAll = _t('CookieSiteConfig.CookieColorCPCActivateAllVAL','#3f7edf');
             }
             if ($this->owner->CookieLabelCPCActivateAll == '') {
-                $this->owner->CookieLabelCPCActivateAll = _t('CookieSiteConfig.CookieLabelCPCActivateAllVAL');
+                $this->owner->CookieLabelCPCActivateAll = _t('CookieSiteConfig.CookieLabelCPCActivateAllVAL','Alle akzeptieren');
             }
             if ($this->owner->CookieLabelCPCDeactivateAll == '') {
-                $this->owner->CookieLabelCPCDeactivateAll = _t('CookieSiteConfig.CookieLabelCPCDeactivateAllVAL');
+                $this->owner->CookieLabelCPCDeactivateAll = _t('CookieSiteConfig.CookieLabelCPCDeactivateAllVAL','Nur technisch notwendige');
             }
             if($this->owner->CookieLabelSaveButton == ''){
-                $this->owner->CookieLabelSaveButton = _t('CookieSiteConfig.CookieLabelSaveButtonVAL');
+                $this->owner->CookieLabelSaveButton = _t('CookieSiteConfig.CookieLabelSaveButtonVAL','Speichern');
             }
         }
         public function onAfterWrite()
@@ -126,48 +132,30 @@
 
         public function getCookieCategoriesByLang($Locale)
         {
-            if($this->owner->hasExtension('Translatable')){
-                return Translatable::get_by_locale('\kw\cookieconsent\CookieCategory', $Locale);
-            } else {
-                return kw\cookieconsent\CookieCategory::get();
-            }
-
+           return CookieCategory::get();
         }
 
         public function getCookieEntriesByLang($Locale)
         {
-            if($this->owner->hasExtension('Translatable')){
-                return Translatable::get_by_locale('\kw\cookieconsent\CookieEntry', $Locale);
-            } else {
-                return kw\cookieconsent\CookieEntry::get();
-            }
-
-
+            CookieEntry::get();
         }
 
         public static function writeConfig()
         {
-            $siteConfig = SiteConfig::current_site_config();
-
-            if($siteConfig->hasExtension('Translatable')){
-                $SiteConfigDefault = Translatable::get_one_by_locale('SiteConfig', Translatable::default_locale());
-            } else {
-                $SiteConfigDefault = $siteConfig;
-            }
+            $SiteConfig = SiteConfig::current_site_config();
 
 
 
-
-            $KlaroConfig = $siteConfig->customise(
+            $KlaroConfig = $SiteConfig->customise(
                 array(
 
-                    'SiteConfigDefault'=>$SiteConfigDefault,
+                    'SiteConfigDefault'=>$SiteConfig,
+                    'DefaultLocale'=>i18n::convert_rfc1766(i18n::get()),
                     'CookieEntries'=>CookieEntry::get(),
                     'CookieCategories'=> CookieCategory::get(),
                 ))->renderWith('KlaroConfig');
 
             $fp = fopen(__DIR__ . '/../../templates/KlaroConfig_write.ss', 'w+');
-            #fwrite($fp, self::compressTemplate($KlaroConfig->Value));
             fwrite($fp, $KlaroConfig->Value);
             fclose($fp);
         }
@@ -183,11 +171,7 @@
 
         public function getJSLocale()
         {
-            if ($this->owner->hasExtension('Translatable')) {
-                $locale = $this->owner->Locale;
-            } else {
-                $locale = i18n::get_locale();
-            }
-            return i18n::get_lang_from_locale($locale);
+            $locale = i18n::get_locale();
+            return i18n::getData()->langFromLocale($locale);
         }
     }

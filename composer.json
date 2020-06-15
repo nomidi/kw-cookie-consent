@@ -1,8 +1,8 @@
 {
   "name": "nomidi/kw-cookie-consent",
   "description": "Klaro Silverstripe Integration",
-  "version": "0.0.1",
-  "type": "silverstripe-module",
+  "version": "0.2",
+  "type": "silverstripe-vendormodule",
   "authors": [{
     "name": "Kooperative web",
     "email": "hallo@kooperative-web.de",
@@ -16,5 +16,16 @@
   "support": {
     "issues": "https://github.com/nomidi/kw-cookie-consent/issues"
   },
+  "require": {
+    "silverstripe/vendor-plugin": "^1",
+    "silverstripe/framework": "^4"
+
+  },
+
+    "extra": {
+        "expose": [
+            "client"
+        ]
+    },
   "license": "BSD-3-Clause"
 }

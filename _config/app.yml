@@ -1,6 +1,6 @@
-SiteConfig:
+SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - kw\cookieconsent\CookieSiteConfig
-Page_Controller:
+SilverStripe\CMS\Controllers\ContentController:
   extensions:
     - kw\cookieconsent\CookieInit
