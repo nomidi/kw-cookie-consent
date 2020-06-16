@@ -15,14 +15,14 @@
                     'decline': '$CookieLabelCPCDeactivateAll',
                     'acceptSelected': '$CookieLabelSaveButton',
 
-            <% if $getCookieCategoriesByLang($Locale) %>
+            <% if $Top.CookieCategories %>
             'purposes': {
-                <% loop $getCookieCategoriesByLang($Locale) %>'$Key': '$Title',<% end_loop %>
+                <% loop $Top.CookieCategories %>'$Key': '$Title',<% end_loop %>
             },
             <% end_if %>
 
-            <% if $getCookieEntriesByLang($Locale) %>
-                <% loop $getCookieEntriesByLang($Locale) %>
+            <% if $Top.CookieEntries %>
+                <% loop $Top.CookieEntries %>
                     '$CookieKey':{
                     'description': '$Purpose'
                 },
