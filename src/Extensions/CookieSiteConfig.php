@@ -32,7 +32,8 @@
             'CookieLabelCPCPurposeDesc'=> 'Text',
             'CookieColorCPCActivateAll'=>'Text',
             'CookieLanguage'=>'Varchar',
-            'CookieLabelSaveButton'=>'Text'
+            'CookieLabelSaveButton'=>'Text',
+            'CookiePureConfig'=>'HTMLText'
         );
 
         private static $has_one = array(
@@ -93,7 +94,7 @@
 
 
 
-
+            $fields->addFieldToTab('Root.CookieConsent', new TextareaField('CookiePureConfig', _t('CookieSiteConfig.CookiePureConfig','Klaro Config (alternative)')));
         }
 
         public function onBeforeWrite()
@@ -143,21 +144,27 @@
         public static function writeConfig()
         {
             $SiteConfig = SiteConfig::current_site_config();
+            if($SiteConfig->CookiePureConfig != ''){
+                $fp = fopen(__DIR__ . '/../../templates/KlaroConfig_write.ss', 'w+');
+                fwrite($fp, '<script>'.$SiteConfig->CookiePureConfig.'</script>');
+                fclose($fp);
+            } else {
+                $KlaroConfig = $SiteConfig->customise(
+                    array(
+
+                        'SiteConfigDefault'=>$SiteConfig,
+                        'DefaultLocale'=>i18n::getData()->langFromLocale(i18n::get_locale()),
+                        'CookieEntries'=>CookieEntry::get(),
+                        'CookieCategories'=> CookieCategory::get(),
+                    ))->renderWith('KlaroConfig');
+
+                $fp = fopen(__DIR__ . '/../../templates/KlaroConfig_write.ss', 'w+');
+                fwrite($fp, $KlaroConfig->Value);
+                fclose($fp);
+            }
 
 
 
-            $KlaroConfig = $SiteConfig->customise(
-                array(
-
-                    'SiteConfigDefault'=>$SiteConfig,
-                    'DefaultLocale'=>i18n::getData()->langFromLocale(i18n::get_locale()),
-                    'CookieEntries'=>CookieEntry::get(),
-                    'CookieCategories'=> CookieCategory::get(),
-                ))->renderWith('KlaroConfig');
-
-            $fp = fopen(__DIR__ . '/../../templates/KlaroConfig_write.ss', 'w+');
-            fwrite($fp, $KlaroConfig->Value);
-            fclose($fp);
         }
         /**
          * compressTemplate compresses the template data and minimize them
