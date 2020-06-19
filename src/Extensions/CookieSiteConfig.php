@@ -129,7 +129,7 @@
             if($this->owner->hasExtension('Translatable')){
                 return Translatable::get_by_locale('\kw\cookieconsent\CookieCategory', $Locale);
             } else {
-                return kw\cookieconsent\CookieCategory::get();
+                return CookieCategory::get();
             }
 
         }
@@ -139,7 +139,7 @@
             if($this->owner->hasExtension('Translatable')){
                 return Translatable::get_by_locale('\kw\cookieconsent\CookieEntry', $Locale);
             } else {
-                return kw\cookieconsent\CookieEntry::get();
+                return CookieEntry::get();
             }
 
 
