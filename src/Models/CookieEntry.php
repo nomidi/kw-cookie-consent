@@ -28,7 +28,9 @@
             'CookieName'=>'Varchar',
             'Time'=>'Varchar',
             'HTMLCode'=>'HTMLText',
-            'HTMLCallback'=>'Varchar'
+            'HTMLCallback'=>'Varchar',
+            'TextBlockedInfo'=>'Varchar',
+            'TextUnblockLink'=>'Varchar'
 
         );
 
@@ -81,7 +83,8 @@
             $fields->addFieldToTab('Root.Main', new \LiteralField('CookieKey','<br>CookieKey: '.$this->CookieKey));
             $fields->addFieldToTab('Root.Code', new \TextField('HTMLCallback',_t('CookieSiteConfig.HTMLCallback', "Callback Funktionsname")));
 
-
+            $fields->addFieldToTab('Root.Code', new TextField('TextBlockedInfo',_t('CookieSiteConfig.TextBlockedInfo', "Text Dienst geblocked")));
+            $fields->addFieldToTab('Root.Code', new TextField('TextUnblockLink',_t('CookieSiteConfig.TextUnblockLink', "Text Dienst Cookie zulassen")));
 
             return $fields;
         }
