@@ -17,4 +17,8 @@
   align-items: center;
 }
 
+.klaro .button, .klaro a {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=kw-klaro.css.map */
