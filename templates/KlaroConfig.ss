@@ -61,7 +61,14 @@
         <% end_if %>
     };
 
-
+    <% loop $CookieEntries %>
+        <% if $TextBlockedInfo %>
+        var {$CookieKey}_textblocked = '$TextBlockedInfo';
+        <% end_if %>
+        <% if $TextUnblockLink %>
+        var {$CookieKey}_textunblock = '$TextUnblockLink';
+        <% end_if %>
+    <% end_loop %>
 
 </script>
 <% loop $CookieEntries %><% if $HTMLCode %>$HTMLCode<% end_if %><% end_loop %>
