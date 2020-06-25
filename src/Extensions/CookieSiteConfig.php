@@ -190,4 +190,13 @@
             }
             return i18n::get_lang_from_locale($locale);
         }
+
+       public function Localerfc1766(){
+           if ($this->owner->hasExtension('Translatable')) {
+               $locale = $this->owner->Locale;
+           } else {
+               $locale = i18n::get_locale();
+           }
+           return i18n::convert_rfc1766($locale);
+       }
     }

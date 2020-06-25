@@ -4,7 +4,7 @@
 
     var privacypage = {
         <% with $SiteConfig %>
-            '$Locale.rfc1766': '$CookieLinkPrivacy().AbsoluteLink()',
+            '$Localerfc1766': '$CookieLinkPrivacy().AbsoluteLink()',
             <% if $Translations %><% loop $Translations %>'$Locale.rfc1766': '$CookieLinkPrivacy().AbsoluteLink()'<% end_loop %>,<% end_if %>
         <% end_with %>
     };
